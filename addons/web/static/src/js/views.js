@@ -1548,15 +1548,7 @@ instance.web.View = instance.web.Widget.extend({
     do_switch_view: function() {
         this.trigger.apply(this, ['switch_mode'].concat(_.toArray(arguments)));
     },
-    /**
-     * Cancels the switch to the current view, switches to the previous one
-     *
-     * @param {Object} [options]
-     * @param {Boolean} [options.created=false] resource was created
-     * @param {String} [options.default=null] view to switch to if no previous view
-     */
-
-    do_search: function(view) {
+    do_search: function(domain, context, group_by) {
     },
     on_sidebar_export: function() {
         new instance.web.DataExport(this, this.dataset).open();
@@ -1617,7 +1609,12 @@ instance.web.fields_view_get = function(args) {
     if (typeof model === 'string') {
         model = new instance.web.Model(args.model, args.context);
     }
-    return args.model.call('fields_view_get', [args.view_id, args.view_type, args.context, args.toolbar]).then(function(fvg) {
+    return args.model.call('fields_view_get', {
+        view_id: args.view_id,
+        view_type: args.view_type,
+        context: args.context,
+        toolbar: args.toolbar
+    }).then(function(fvg) {
         return postprocess(fvg);
     });
 };

@@ -191,6 +191,8 @@ def depends(*args):
     """
     if args and callable(args[0]):
         args = args[0]
+    elif any('id' in arg.split('.') for arg in args):
+        raise NotImplementedError("Compute method cannot depend on field 'id'.")
     return lambda method: decorate(method, '_depends', args)
 
 
@@ -690,6 +692,13 @@ class Environment(object):
                 yield
             finally:
                 release_local(cls._local)
+
+    @classmethod
+    def reset(cls):
+        """ Clear the set of environments.
+            This may be useful when recreating a registry inside a transaction.
+        """
+        cls._local.environments = Environments()
 
     def __new__(cls, cr, uid, context):
         assert context is not None
