@@ -239,6 +239,8 @@ class configmanager(object):
                          help="specify the maximum number of physical connections to PostgreSQL")
         group.add_option("--db-template", dest="db_template", my_default="template0",
                          help="specify a custom database template to create a new database")
+        group.add_option("--db-maintenance", dest="db_maintenance", my_default="postgres",
+                         help="specify a custom database to connect to for bus and maintenance operations")
         parser.add_option_group(group)
 
         group = optparse.OptionGroup(parser, "Internationalisation options. ",
@@ -428,7 +430,7 @@ class configmanager(object):
         # if defined do not take the configfile value even if the defined value is None
         keys = ['http_interface', 'http_port', 'longpolling_port', 'http_enable',
                 'db_name', 'db_user', 'db_password', 'db_host', 'db_sslmode',
-                'db_port', 'db_template', 'logfile', 'pidfile', 'smtp_port',
+                'db_port', 'db_template', 'db_maintenance', 'logfile', 'pidfile', 'smtp_port',
                 'email_from', 'smtp_server', 'smtp_user', 'smtp_password',
                 'db_maxconn', 'import_partial', 'addons_path', 'upgrade_path',
                 'syslog', 'without_demo', 'screencasts', 'screenshots',

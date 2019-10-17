@@ -153,6 +153,11 @@ Database
     when creating new databases from the database-management screens, use the
     specified `template database`_. Defaults to ``template0``.
 
+.. option:: --db-maintenance <maintenance>
+
+    Independant database to use for the communication bus and for database
+    related operations. Defaults to ``postgres``
+
 .. option:: --pg_path </path/to/postgresql/binaries>
 
     Path to the PostgreSQL binaries that are used by the database manager to
